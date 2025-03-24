@@ -2,6 +2,6 @@ package Enteties
 
 type Transaction struct {
 	AccountID   int `json:"accountID"`
-	Transaction int
-	Amount      int `json:"amount"`
+	Transaction string
+	Amount      float64 `json:"amount"`
 }

@@ -12,7 +12,7 @@ import (
 )
 
 // transferFunds: PUT /api/accounts/transfer
-func ProcessTransfer(transfer Enteties.Transaction) {
+func ProcessTransfer(transfer Enteties.Transfer) {
 	url := fmt.Sprintf("%vapi/accounts/transfer", config.Domain)
 
 	requestBody, err := json.Marshal(transfer)

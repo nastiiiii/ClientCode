@@ -11,17 +11,21 @@ import (
 	"net/http"
 )
 
-func UpdateStudent(student Enteties.Students, studentID int) {
+func UpdateStudent(student Enteties.Students, studentID int) error {
 	url := fmt.Sprintf("%vapi/students/%d", config.Domain, studentID)
+
+	student.StudentID = studentID
 
 	requestBody, err := json.Marshal(student)
 	if err != nil {
 		fmt.Errorf("error encoding JSON: %w", err)
+		return err
 	}
 
 	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(requestBody))
 	if err != nil {
 		fmt.Errorf("error creating PUT request %w", err)
+		return err
 	}
 
 	req.Header.Set("Content-Type", "application/json")
@@ -30,12 +34,14 @@ func UpdateStudent(student Enteties.Students, studentID int) {
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Printf("error sendiong PUT request %w", err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	responseBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Errorf("error reafing response body %w", err)
+		return err
 	}
 
 	log.Printf("Server response status: %s", resp.Status)
@@ -43,5 +49,7 @@ func UpdateStudent(student Enteties.Students, studentID int) {
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		fmt.Errorf("server responded with non-2xx status code: %d", resp.StatusCode)
+		return err
 	}
+	return nil
 }

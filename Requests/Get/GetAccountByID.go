@@ -11,21 +11,24 @@ import (
 )
 
 // GetByAccountID retrieves an account by its ID and parses the response JSON into an Account struct.
-func GetByAccountID(id int) {
+func GetByAccountID(id int) (Enteties.Account, error) {
 	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, id)
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Error performing GET request: %v", err)
+		return Enteties.Account{}, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		log.Fatalf("Received non-OK response: %d %s", resp.StatusCode, resp.Status)
+		return Enteties.Account{}, err
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Error reading response body: %v", err)
+		return Enteties.Account{}, err
 	}
 
 	var account Enteties.Account
@@ -33,7 +36,9 @@ func GetByAccountID(id int) {
 	err = json.Unmarshal(body, &account)
 	if err != nil {
 		log.Fatalf("Error unmarshaling JSON: %v", err)
+		return Enteties.Account{}, err
 	}
 
 	log.Printf("Account Parsed: %+v", account)
+	return account, nil
 }

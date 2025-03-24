@@ -8,24 +8,27 @@ import (
 	"net/http"
 )
 
-func DeleteStudent(studentID int) {
+func DeleteStudent(studentID int) error {
 	url := fmt.Sprintf("%vapi/students/delete/%d", config.Domain, studentID)
 
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {
 		fmt.Errorf("error creating DELETE request: %w", err)
+		return err
 	}
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Errorf("error sending DELETE request: %w", err)
+		return err
 	}
 	defer resp.Body.Close()
 
 	responseBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Errorf("error reading response body: %w", err)
+		return err
 	}
 
 	log.Printf("Server response status: %s", resp.Status)
@@ -33,5 +36,7 @@ func DeleteStudent(studentID int) {
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		fmt.Errorf("server responded with non-2xx status: %d", resp.StatusCode)
+		return err
 	}
+	return nil
 }
