@@ -19,6 +19,7 @@ func ProcessTransactionFeature(transaction Enteties.Transaction, accountID int) 
 	}
 
 	// Find index of the current account
+	//Put it as the first in a slice
 	startIndex := -1
 	for i, acct := range accounts {
 		if acct.AccountID == currentAccount.AccountID {
@@ -29,6 +30,17 @@ func ProcessTransactionFeature(transaction Enteties.Transaction, accountID int) 
 	if startIndex == -1 {
 		return fmt.Errorf("current account not found in student's account list")
 	}
+
+	// Move the found account to the beginning of the slice
+	if startIndex != 0 {
+		mainAccount := accounts[startIndex]
+		// Remove it from its original position
+		accounts = append(accounts[:startIndex], accounts[startIndex+1:]...)
+		// Insert it at the beginning
+		accounts = append([]Enteties.Account{mainAccount}, accounts...)
+	}
+
+	startIndex = 0
 
 	amountNeeded := transaction.Amount
 
@@ -45,7 +57,7 @@ func ProcessTransactionFeature(transaction Enteties.Transaction, accountID int) 
 		// Make a transaction for that contribution
 		partialTx := Enteties.Transaction{
 			AccountID: account.AccountID,
-			Operation: "deposit",
+			Operation: "withdraw",
 			Amount:    contribution,
 		}
 		ProcessTransaction(partialTx, account.AccountID)

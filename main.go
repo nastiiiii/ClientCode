@@ -71,10 +71,10 @@ func main() {
 			//Tested
 			deleteAccountCLI(reader)
 		case "10":
-			//TODO go down
+			//TODO bug second
 			processTransactionCLI(reader)
 		case "11":
-			//TODO go down
+			//TODO bug second
 			processTransferCLI(reader)
 		case "12":
 			//Tested
@@ -384,7 +384,6 @@ func processTransactionCLI(reader *bufio.Reader) {
 	}
 
 	fmt.Println("\nChoose Transaction Processing Method:")
-	//TODO 400 Bad Request
 	fmt.Println("1) ProcessTransaction")
 	fmt.Println("2) ProcessTransactionFeature")
 	choiceStr, _ := reader.ReadString('\n')
@@ -461,7 +460,6 @@ func processTransferCLI(reader *bufio.Reader) {
 		ToStudentID:   toStudID,
 		Amount:        amount,
 	}
-	//TODO 400 bad request
 	fmt.Println("\nChoose Transfer Processing Method:")
 	fmt.Println("1) ProcessTransfer")
 	fmt.Println("2) ProcessTransferFeature")

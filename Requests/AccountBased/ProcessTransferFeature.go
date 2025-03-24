@@ -13,6 +13,7 @@ func ProcessTransferFeature(transfer Enteties.Transfer) error {
 	}
 
 	startIndex := -1
+	//TODO put the main account the first in the slice
 	for i, acct := range fromAccounts {
 		if acct.AccountID == transfer.FromAccountID {
 			startIndex = i
@@ -22,6 +23,16 @@ func ProcessTransferFeature(transfer Enteties.Transfer) error {
 	if startIndex == -1 {
 		return fmt.Errorf("initial fromAccountID=%d not found among the student's accounts", transfer.FromAccountID)
 	}
+
+	// Move the found account to the beginning of the slice
+	if startIndex != 0 {
+		mainAccount := fromAccounts[startIndex]
+		// Remove it from its original position
+		fromAccounts = append(fromAccounts[:startIndex], fromAccounts[startIndex+1:]...)
+		// Insert it at the beginning
+		fromAccounts = append([]Enteties.Account{mainAccount}, fromAccounts...)
+	}
+	startIndex = 0
 
 	amountNeeded := transfer.Amount
 
