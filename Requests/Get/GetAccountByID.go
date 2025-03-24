@@ -1,6 +1,7 @@
 package Get
 
 import (
+	"awesomeProject/Requests/config"
 	"fmt"
 	"io"
 	"log"
@@ -8,7 +9,7 @@ import (
 )
 
 func GetByAccountID(id int) {
-	url := fmt.Sprintf("http://localhost/Bank/api/accounts/%d", id)
+	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, id)
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)

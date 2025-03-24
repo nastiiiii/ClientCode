@@ -1,6 +1,7 @@
 package Delete
 
 import (
+	"awesomeProject/Requests/config"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -8,7 +9,7 @@ import (
 )
 
 func DeleteStudent(studentID int) {
-	url := fmt.Sprintf("https://postman-echo.com/delete/%d", studentID)
+	url := fmt.Sprintf("%vapi/students/delete/%d", config.Domain, studentID)
 
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {

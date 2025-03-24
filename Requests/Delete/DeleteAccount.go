@@ -1,6 +1,8 @@
 package Delete
 
 import (
+	"awesomeProject/Requests/config"
+	_ "awesomeProject/Requests/config"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -8,7 +10,7 @@ import (
 )
 
 func DeleteAccount(accountID int) {
-	url := fmt.Sprintf("https://postman-echo.com/delete/%d", accountID)
+	url := fmt.Sprintf("%vapi/accounts/delete/%d", config.Domain, accountID)
 
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {

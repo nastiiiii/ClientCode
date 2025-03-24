@@ -2,6 +2,7 @@ package Post
 
 import (
 	"awesomeProject/Enteties"
+	"awesomeProject/Requests/config"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -18,7 +19,9 @@ func CreateAccountForStudent(account Enteties.Account) {
 
 	requestBody := bytes.NewBuffer(postBody)
 
-	resp, err := http.Post("http://localhost:8080/Bank/api/students", "application/json", requestBody)
+	url := fmt.Sprintf("%vapi/accounts", config.Domain)
+
+	resp, err := http.Post(url, "application/json", requestBody)
 	if err != nil {
 		log.Fatal("Error making POST request: %v", err)
 	}

@@ -2,6 +2,7 @@ package Update
 
 import (
 	"awesomeProject/Enteties"
+	"awesomeProject/Requests/config"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -11,7 +12,7 @@ import (
 )
 
 func UpdateAccount(account Enteties.Account, accountID int) {
-	url := fmt.Sprintf("http://localhost:8080/Bank/api/accounts/", accountID)
+	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, accountID)
 
 	requestBody, err := json.Marshal(account)
 	if err != nil {

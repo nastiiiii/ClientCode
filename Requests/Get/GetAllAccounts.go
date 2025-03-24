@@ -1,13 +1,17 @@
 package Get
 
 import (
+	"awesomeProject/Requests/config"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
 )
 
 func GetAllAccounts() {
-	resp, err := http.Get("http://loaclhost/Bank/api/accounts")
+	url := fmt.Sprintf("%vapi/accounts", config.Domain)
+
+	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatal(err)
 	}
