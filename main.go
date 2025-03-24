@@ -73,7 +73,6 @@ func main() {
 		case "10":
 			processTransactionCLI(reader)
 		case "11":
-			//TODO
 			processTransferCLI(reader)
 		case "12":
 			//Tested
