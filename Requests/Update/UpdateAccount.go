@@ -11,10 +11,8 @@ import (
 	"net/http"
 )
 
-func UpdateAccount(account Enteties.Account, accountID int) error {
-	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, accountID)
-
-	account.AccountID = accountID
+func UpdateAccount(account Enteties.Account) error {
+	url := fmt.Sprintf("%vapi/accounts", config.Domain)
 
 	requestBody, err := json.Marshal(account)
 	if err != nil {

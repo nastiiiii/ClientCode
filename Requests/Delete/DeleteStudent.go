@@ -9,7 +9,7 @@ import (
 )
 
 func DeleteStudent(studentID int) error {
-	url := fmt.Sprintf("%vapi/students/delete/%d", config.Domain, studentID)
+	url := fmt.Sprintf("%vapi/students/%d", config.Domain, studentID)
 
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {

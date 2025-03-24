@@ -10,7 +10,7 @@ import (
 )
 
 func DeleteAccount(accountID int) error {
-	url := fmt.Sprintf("%vapi/accounts/delete/%d", config.Domain, accountID)
+	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, accountID)
 
 	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {

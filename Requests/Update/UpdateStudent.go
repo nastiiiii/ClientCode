@@ -11,10 +11,8 @@ import (
 	"net/http"
 )
 
-func UpdateStudent(student Enteties.Students, studentID int) error {
-	url := fmt.Sprintf("%vapi/students/%d", config.Domain, studentID)
-
-	student.StudentID = studentID
+func UpdateStudent(student Enteties.Students) error {
+	url := fmt.Sprintf("%vapi/students", config.Domain)
 
 	requestBody, err := json.Marshal(student)
 	if err != nil {

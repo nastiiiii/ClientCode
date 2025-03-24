@@ -44,30 +44,43 @@ func main() {
 
 		switch choiceStr {
 		case "1":
+			//Tested
 			createStudentCLI(reader)
 		case "2":
+			//Tested
 			createAccountForStudentCLI(reader)
 		case "3":
+			//Tested
 			getStudentByIDCLI(reader)
 		case "4":
+			//Tested
 			getAccountByIDCLI(reader)
 		case "5":
+			//Tested
 			getAccountsByStudentIDCLI(reader)
 		case "6":
+			//TODO Method not allowed 405
 			updateStudentCLI(reader)
 		case "7":
+			//TODO Bad request 400 invalid input or error
 			updateAccountCLI(reader)
 		case "8":
+			//TODO Not Found 404
 			deleteStudentCLI(reader)
 		case "9":
+			//TODO Not Found 404
 			deleteAccountCLI(reader)
 		case "10":
+			//TODO go down
 			processTransactionCLI(reader)
 		case "11":
+			//TODO go down
 			processTransferCLI(reader)
 		case "12":
+			//Tested
 			showAllStudentsCLI()
 		case "13":
+			//Tested
 			showAllAccountsCLI()
 		case "0":
 			fmt.Println("Exiting application.")
@@ -234,13 +247,14 @@ func updateStudentCLI(reader *bufio.Reader) {
 	phone = strings.TrimSpace(phone)
 
 	updatedStudent := Enteties.Students{
+		StudentID:      studID,
 		StudentName:    name,
 		StudentAddress: address,
 		StudentEmail:   email,
 		StudentPhone:   phone,
 	}
 
-	err = Update.UpdateStudent(updatedStudent, studID)
+	err = Update.UpdateStudent(updatedStudent)
 	if err != nil {
 		log.Println("Error updating student:", err)
 		return
@@ -283,12 +297,13 @@ func updateAccountCLI(reader *bufio.Reader) {
 	}
 
 	updatedAccount := Enteties.Account{
+		AccountID:      accID,
 		StudentID:      studID,
 		AccountAlias:   alias,
 		AccountBalance: balance,
 	}
 
-	err = Update.UpdateAccount(updatedAccount, accID)
+	err = Update.UpdateAccount(updatedAccount)
 	if err != nil {
 		log.Println("Error updating account:", err)
 		return
@@ -369,6 +384,7 @@ func processTransactionCLI(reader *bufio.Reader) {
 	}
 
 	fmt.Println("\nChoose Transaction Processing Method:")
+	//TODO 400 Bad Request
 	fmt.Println("1) ProcessTransaction")
 	fmt.Println("2) ProcessTransactionFeature")
 	choiceStr, _ := reader.ReadString('\n')
@@ -445,7 +461,7 @@ func processTransferCLI(reader *bufio.Reader) {
 		ToStudentID:   toStudID,
 		Amount:        amount,
 	}
-
+	//TODO 400 bad request
 	fmt.Println("\nChoose Transfer Processing Method:")
 	fmt.Println("1) ProcessTransfer")
 	fmt.Println("2) ProcessTransferFeature")
