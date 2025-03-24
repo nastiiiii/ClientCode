@@ -27,7 +27,7 @@ func main() {
 		StudentEmail:   "nas.nas@uwu.com",
 		StudentPhone:   "+5554623982",
 	}
-	Post.CreateAccountForStudent(acc)
+	Post.CreateAccountForStudent(acc, 1)
 	Post.CreateStudent(stud)
 
 	stud.StudentName = "NewName"

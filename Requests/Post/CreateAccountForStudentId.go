@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-func CreateAccountForStudent(account Enteties.Account) {
+func CreateAccountForStudent(account Enteties.Account, studentID int) {
 	postBody, err := json.Marshal(account)
 	if err != nil {
 		log.Fatal("Error encoding JSON %v", err)
@@ -19,7 +19,7 @@ func CreateAccountForStudent(account Enteties.Account) {
 
 	requestBody := bytes.NewBuffer(postBody)
 
-	url := fmt.Sprintf("%vapi/accounts", config.Domain)
+	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, studentID)
 
 	resp, err := http.Post(url, "application/json", requestBody)
 	if err != nil {
