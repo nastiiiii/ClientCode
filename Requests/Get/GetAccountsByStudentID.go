@@ -11,24 +11,21 @@ import (
 )
 
 // GetAccountsByStudentID retrieves multiple accounts for a given student ID.
-func GetAccountsByStudentID(id int) ([]Enteties.Account, error) {
+func GetAccountsByStudentID(id int) []Enteties.Account {
 	url := fmt.Sprintf("%vapi/accounts/studentID/%d", config.Domain, id)
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatalf("Error performing GET request: %v", err)
-		return nil, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		log.Fatalf("Received non-OK response: %d %s", resp.StatusCode, resp.Status)
-		return nil, err
 	}
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Error reading response body: %v", err)
-		return nil, err
 	}
 
 	var accounts []Enteties.Account
@@ -36,8 +33,7 @@ func GetAccountsByStudentID(id int) ([]Enteties.Account, error) {
 	err = json.Unmarshal(body, &accounts)
 	if err != nil {
 		log.Fatalf("Error unmarshaling JSON: %v", err)
-		return nil, err
 	}
 
-	return accounts, nil
+	return accounts
 }

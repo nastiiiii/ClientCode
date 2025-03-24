@@ -183,11 +183,7 @@ func getAccountByIDCLI(reader *bufio.Reader) {
 		return
 	}
 
-	account, err := Get.GetByAccountID(accountID)
-	if err != nil {
-		log.Println("Error getting account by ID:", err)
-		return
-	}
+	account := Get.GetByAccountID(accountID)
 
 	accJSON, _ := json.MarshalIndent(account, "", "  ")
 	fmt.Println("Account:", string(accJSON))
@@ -204,11 +200,7 @@ func getAccountsByStudentIDCLI(reader *bufio.Reader) {
 		return
 	}
 
-	accounts, err := Get.GetAccountsByStudentID(studID)
-	if err != nil {
-		log.Println("Error getting accounts for student:", err)
-		return
-	}
+	accounts := Get.GetAccountsByStudentID(studID)
 
 	accJSON, _ := json.MarshalIndent(accounts, "", "  ")
 	fmt.Println("Accounts:", string(accJSON))
