@@ -19,7 +19,7 @@ func CreateAccountForStudent(account Enteties.Account, studentID int) {
 
 	requestBody := bytes.NewBuffer(postBody)
 
-	url := fmt.Sprintf("%vapi/accounts/%d", config.Domain, studentID)
+	url := fmt.Sprintf("%vapi/accounts/studentID/%d", config.Domain, studentID)
 
 	resp, err := http.Post(url, "application/json", requestBody)
 	if err != nil {
