@@ -19,7 +19,6 @@ func ProcessTransactionFeature(transaction Enteties.Transaction, accountID int) 
 	}
 
 	// Find index of the current account
-	//Put it as the first in a slice
 	startIndex := -1
 	for i, acct := range accounts {
 		if acct.AccountID == currentAccount.AccountID {

@@ -62,7 +62,7 @@ func main() {
 			//Tested
 			updateStudentCLI(reader)
 		case "7":
-			//TODO check
+			//Tested
 			updateAccountCLI(reader)
 		case "8":
 			//Tested
@@ -71,10 +71,9 @@ func main() {
 			//Tested
 			deleteAccountCLI(reader)
 		case "10":
-			//TODO bug second
 			processTransactionCLI(reader)
 		case "11":
-			//TODO bug second
+			//TODO
 			processTransferCLI(reader)
 		case "12":
 			//Tested
