@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-func CreateAccountForStudent(account Enteties.Account, studentID int) {
+func CreateAccountForStudent(account Enteties.AddAccount, studentID int) {
 	postBody, err := json.Marshal(account)
 	if err != nil {
 		log.Fatal("Error encoding JSON %v", err)

@@ -6,18 +6,32 @@ import (
 	"awesomeProject/Requests/Get"
 	"awesomeProject/Requests/Post"
 	"awesomeProject/Requests/Update"
+	"encoding/json"
+	"fmt"
 )
 
 // "http://loaclhost/Bank/api/students"
 func main() {
+	acc := Enteties.Account{
+		StudentID:      1,
+		AccountAlias:   "TestAccount",
+		AccountBalance: 170,
+	}
+
+	jsonAcc, err := json.Marshal(&acc)
+	if err != nil {
+		fmt.Errorf("error encoding JSON: %w", err)
+	}
+
+	fmt.Println(string(jsonAcc))
+
 	Get.GetByAccountID(1)
 	Get.GetByStudentID(1)
 	Get.GetAccountsByStudentID(1)
 	Get.GetAllAccounts()
 	Get.GetAllStudents()
 
-	acc := Enteties.Account{
-		StudentID:      1,
+	addAccount := Enteties.AddAccount{
 		AccountAlias:   "TestAccount",
 		AccountBalance: 170,
 	}
