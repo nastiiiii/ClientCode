@@ -59,16 +59,16 @@ func main() {
 			//Tested
 			getAccountsByStudentIDCLI(reader)
 		case "6":
-			//TODO Method not allowed 405
+			//Tested
 			updateStudentCLI(reader)
 		case "7":
-			//TODO Bad request 400 invalid input or error
+			//TODO check
 			updateAccountCLI(reader)
 		case "8":
-			//TODO Not Found 404
+			//Tested
 			deleteStudentCLI(reader)
 		case "9":
-			//TODO Not Found 404
+			//Tested
 			deleteAccountCLI(reader)
 		case "10":
 			//TODO go down
@@ -364,7 +364,7 @@ func processTransactionCLI(reader *bufio.Reader) {
 		return
 	}
 
-	fmt.Print("Enter transaction type (deposit/withdraw): ")
+	fmt.Print("Enter operation type (deposit/withdraw): ")
 	transactionType, _ := reader.ReadString('\n')
 	transactionType = strings.TrimSpace(transactionType)
 
@@ -378,9 +378,9 @@ func processTransactionCLI(reader *bufio.Reader) {
 	}
 
 	trans := Enteties.Transaction{
-		AccountID:   accID,
-		Transaction: transactionType,
-		Amount:      amount,
+		AccountID: accID,
+		Operation: transactionType,
+		Amount:    amount,
 	}
 
 	fmt.Println("\nChoose Transaction Processing Method:")

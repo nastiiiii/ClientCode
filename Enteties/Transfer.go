@@ -5,5 +5,5 @@ type Transfer struct {
 	ToAccountID   int     `json:"toAccountID"`
 	FromStudentID int     `json:"fromStudentID"`
 	ToStudentID   int     `json:"toStudentID"`
-	Amount        float64 `json:"Amount"`
+	Amount        float64 `json:"amount"`
 }

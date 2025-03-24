@@ -7,6 +7,10 @@ import (
 )
 
 func ProcessTransactionFeature(transaction Enteties.Transaction, accountID int) error {
+	if transaction.Operation == "deposit" {
+		ProcessTransaction(transaction, accountID)
+	}
+
 	currentAccount := Get.GetByAccountID(accountID)
 
 	accounts := Get.GetAccountsByStudentID(currentAccount.StudentID)
@@ -40,9 +44,9 @@ func ProcessTransactionFeature(transaction Enteties.Transaction, accountID int) 
 
 		// Make a transaction for that contribution
 		partialTx := Enteties.Transaction{
-			AccountID:   account.AccountID,
-			Transaction: "deposit",
-			Amount:      contribution,
+			AccountID: account.AccountID,
+			Operation: "deposit",
+			Amount:    contribution,
 		}
 		ProcessTransaction(partialTx, account.AccountID)
 
